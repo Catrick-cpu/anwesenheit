@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Anwesenheit - Attendance Management System
 
-## Getting Started
+A modern, secure attendance management system built with Next.js, perfect for factories and large organizations. Simple check-in/check-out buttons for workers, comprehensive admin dashboard with GSAP animations.
 
-First, run the development server:
+## Features
+
+✨ **Modern UI with GSAP Animations**
+- Smooth, fluid animations throughout the application
+- Responsive design that works on all devices
+- Dark theme optimized for reduced eye strain
+
+🔐 **Enterprise Security**
+- BCrypt password hashing (salted 12 rounds)
+- JWT-based authentication with 24-hour expiration
+- HTTP-only secure cookies
+- CSRF protection via SameSite cookies
+- Role-based access control (RBAC)
+
+👥 **User Management**
+- Admin-only account creation via invite codes
+- Worker accounts for factory floor
+- Role-based dashboards
+- Session tracking and history
+
+📊 **Admin Dashboard**
+- Real-time stats (total users, sessions, hours logged)
+- Live online users tracking
+- Leaderboard with total hours worked
+- Session history with detailed logs
+
+🏭 **Worker Interface**
+- Simple one-click check-in/check-out
+- Current session status display
+- NFC-ready architecture for future integration
+
+## Tech Stack
+
+- **Framework**: Next.js 16 with TypeScript
+- **Database**: SQLite (upgradeable to PostgreSQL)
+- **Authentication**: JWT + BCrypt
+- **Animations**: GSAP 3
+- **Styling**: Tailwind CSS 4
+- **Deployment**: Vercel
+
+## Quick Start
+
+### Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create `.env.local`:
+```
+JWT_SECRET=your-super-secret-key-min-32-chars
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Deploy to Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push code to GitHub
+2. Connect to Vercel
+3. Add environment variables:
+   - `JWT_SECRET` (random 32+ chars)
+   - `NEXT_PUBLIC_API_URL` (your Vercel domain)
+4. Deploy!
 
-## Learn More
+## API Routes
 
-To learn more about Next.js, take a look at the following resources:
+- `POST /api/auth/login` - User login
+- `POST /api/auth/signup` - Create account
+- `POST /api/sessions/checkin` - Start work session
+- `POST /api/sessions/checkout` - End work session
+- `GET /api/admin/stats` - Dashboard stats
+- `POST /api/admin/invite` - Create admin invite
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Security
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- ✅ BCrypt password hashing (12 rounds)
+- ✅ JWT tokens with 24h expiration
+- ✅ HTTP-only secure cookies
+- ✅ CSRF protection (SameSite)
+- ✅ Role-based access control
+- ✅ Parameterized SQL queries
+- ✅ Full TypeScript type safety
 
-## Deploy on Vercel
+## First Setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Sign up without invite code (becomes admin)
+2. Admin generates invite codes
+3. Workers sign up with invite (or regular signup)
+4. Start tracking attendance!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## NFC Integration
+
+The worker check-in page is ready for NFC. Replace the button click handler with your NFC reader library to read employee cards instead of manual clicks.
+
+---
+
+**Deploy with confidence. Enterprise-grade attendance tracking.**
